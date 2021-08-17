@@ -1,16 +1,40 @@
-# myfirstapp
 
-A new Flutter project.
+# Números Primos
 
-## Getting Started
+App en flutter que genera números primos al presionar el botón.
+#### Captura
 
-This project is a starting point for a Flutter application.
+![image](https://github.com/MCris29/flutter-prime-numbers/blob/master/images/captura.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Función que genera números primos
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```javascript
+int _init = 1;
+int _end = 50;
+String _numbers = "";
+
+void _generate_prime_numbers() {
+    while (_init < _end) {
+      if (_checkPrimerNumber(_init)) {
+        setState(() {
+          _numbers += _init.toString() + "   ";
+        });
+      }
+      _init++;
+    }
+  }
+
+  bool _checkPrimerNumber(int value) {
+    bool n = true;
+    for (var i = 2; i < value; i++) {
+      if (value % i == 0) {
+        n = false;
+        break;
+      }
+    }
+    return n;
+  }
+```
+
+  

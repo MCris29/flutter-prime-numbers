@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'Hola Mundo'),
+      home: MyHomePage(title: 'Números Primos'),
     );
   }
 }
@@ -46,17 +46,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _init = 1;
+  int _end = 50;
+  String _numbers = "";
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  void _generate_prime_numbers() {
+    while (_init < _end) {
+      if (_checkPrimerNumber(_init)) {
+        setState(() {
+          _numbers += _init.toString() + "   ";
+        });
+      }
+      _init++;
+    }
+  }
+
+  bool _checkPrimerNumber(int value) {
+    bool n = true;
+    for (var i = 2; i < value; i++) {
+      if (value % i == 0) {
+        n = false;
+        break;
+      }
+    }
+    return n;
   }
 
   @override
@@ -94,19 +107,23 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'Números primos entre el 1 al 50',
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              '$_numbers',
+              style: TextStyle(
+                color: Colors.green,
+                fontSize: 25,
+              ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: _generate_prime_numbers,
+        tooltip: 'Generar números primos',
+        child: Icon(Icons.repeat_one),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
